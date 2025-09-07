@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>User Portal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 30px;
+      background: #f4f4f9;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      max-width: 400px;
+      margin: auto;
+    }
+    input, button {
+      padding: 10px;
+      margin: 10px 0;
+      width: 90%;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    button {
+      background: #2563eb;
+      color: white;
+      cursor: pointer;
+      border: none;
+    }
+    button:hover {
+      background: #1e40af;
+    }
+    #welcomeSection {
+      display: none;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    ul li {
+      margin: 12px 0;
+    }
+    a {
+      text-decoration: none;
+      font-weight: bold;
+      color: #2563eb;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Form Section -->
+  <div class="card" id="formSection">
+    <h2>Enter Your Details</h2>
+    <form id="loginForm">
+      <input type="text" id="name" placeholder="Enter your name" required><br>
+      <input type="tel" id="phone" placeholder="Enter phone number" pattern="\d{7,15}" required><br>
+      <button type="submit">Enter</button>
+    </form>
+  </div>
+
+  <!-- Welcome Section -->
+  <div class="card" id="welcomeSection">
+    <h1 id="welcomeText"></h1>
+    <p>Choose an option:</p>
+    <ul>
+      <li><a href="#">🎮 Play Game 1</a></li>
+      <li><a href="#">🎲 Play Game 2</a></li>
+      <li><a href="#">ℹ️ About</a></li>
+      <li><a href="#">📞 Contact</a></li>
+    </ul>
+  </div>
+
+  <script>
+    const form = document.getElementById("loginForm");
+    const formSection = document.getElementById("formSection");
+    const welcomeSection = document.getElementById("welcomeSection");
+    const welcomeText = document.getElementById("welcomeText");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+
+      if (name.length < 2) {
+        alert("Please enter a valid name.");
+        return;
+      }
+      if (!/^\d{7,15}$/.test(phone)) {
+        alert("Please enter a valid phone number (7-15 digits).");
+        return;
+      }
+
+      // Hide form, show welcome section
+      formSection.style.display = "none";
+      welcomeSection.style.display = "block";
+
+      // Show welcome text
+      welcomeText.textContent = "Welcome, " + name + "!";
+    });
+  </script>
+</body>
+</html>
